@@ -1,31 +1,71 @@
 
-const audio = document.querySelector("#animalAudio");
-const playBtn = document.querySelector("#playBtn");
-const revealBtn = document.querySelector("#revealBtn");
-const hideBtn = document.querySelector("#hideBtn");
-const answer = document.querySelector("#answer");
-const status = document.querySelector("#status");
-
-playBtn.disabled = false;
-
-playBtn.addEventListener("click", async () => {
-    try {
-        audio.currentTime = 0;
-        await audio.play();
-        status.textContent = "Escute e tente adivinhar o animal!";
-    } catch (error) {
-        status.textContent = "Erro ao tocar o áudio. Confira o arquivo vaca.mp3.";
+const animais = {
+    gato: {
+        nome: "um gato 🐱",
+        arquivo: "gato.mp3",
+        som: "Miau!"
+    },
+    cavalo: {
+        nome: "um cavalo 🐴",
+        arquivo: "cavalo.mp3",
+        som: "Relincho!"
+    },
+    vaca: {
+        nome: "uma vaca 🐄",
+        arquivo: "vaca.mp3",
+        som: "Muuuu!"
+    },
+    galo: {
+        nome: "um galo 🐓",
+        arquivo: "galo.mp3",
+        som: "Cocoricó!"
+    },
+    elefante: {
+        nome: "um elefante 🐘",
+        arquivo: "elefante.mp3",
+        som: "Som do elefante!"
+    },
+    porco: {
+        nome: "um porco 🐷",
+        arquivo: "porco.mp3",
+        som: "Oinc oinc!"
+    },
+    leao: {
+        nome: "um leão 🦁",
+        arquivo: "leao.mp3",
+        som: "Rugido!"
+    },
+    pato: {
+        nome: "um pato 🦆",
+        arquivo: "pato.mp3",
+        som: "Quack quack!"
+    },
+    pintinho: {
+        nome: "um pintinho 🐥",
+        arquivo: "pintinho.mp3",
+        som: "Piu piu!"
+    },
+    cachorro: {
+        nome: "um cachorro 🐶",
+        arquivo: "cachorro.mp3",
+        som: "Au au!"
+    },
+    cabra: {
+        nome: "uma cabra 🐐",
+        arquivo: "cabra.mp3",
+        som: "Mééé!"
     }
-});
+};
 
-revealBtn.addEventListener("click", () => {
-    answer.classList.add("visible");
-    answer.setAttribute("aria-hidden", "false");
-    status.textContent = "Resposta revelada!";
-});
+// Identifica o animal pela URL
+const parametros = new URLSearchParams(window.location.search);
+const idAnimal = parametros.get("animal") || "vaca";
+const animal = animais[idAnimal] || animais.vaca;
 
-hideBtn.addEventListener("click", () => {
-    answer.classList.remove("visible");
-    answer.setAttribute("aria-hidden", "true");
-    status.textContent = "Resposta escondida. Tente novamente!";
-});
+// Seleciona o áudio da página
+const audio = document.querySelector("#animalAudio");
+
+if (audio) {
+    audio.src = animal.arquivo;
+    audio.load();
+}
