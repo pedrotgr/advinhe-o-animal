@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Adivinhe o animal</title>
+
+    <!-- Conecta o arquivo CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Conecta o arquivo JavaScript -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <main class="app">
+        <div class="wrap">
+
+            <header>
+                <h1>Adivinhe o animal 🐾</h1>
+
+                <p>
+                    Escute com atenção, tente descobrir qual animal
+                    está fazendo esse som e revele a resposta
+                    quando estiver pronto.
+                </p>
+            </header>
+
+            <section class="panel">
+
+                <div class="step">Etapa 1 · Escute</div>
+
+                <h2>Que animal é esse?</h2>
+
+                <p class="muted">
+                    O som deve tocar antes de você ver a imagem.
+                    Se ainda não carregou o áudio, selecione
+                    um arquivo MP3 abaixo.
+                </p>
+
+                
+<div class="audio-row">
+
+    <strong>Som do animal</strong>
+
+    <audio id="animalAudio" controls preload="metadata">
+        <source src="sons/vaca.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+
+</div>
+
+                    
+
+                <div class="actions">
+
+                    <button
+                        id="playBtn"
+                        class="primary"
+                        disabled
+                    >
+                        🔊 Tocar som
+                    </button>
+
+                    <button
+                        id="revealBtn"
+                        class="secondary"
+                    >
+                        👀 Revelar resposta
+                    </button>
+
+                </div>
+
+               
+
+                <div
+                    id="answer"
+                    class="answer"
+                    aria-hidden="true"
+                >
+
+                    <div class="step">Etapa 2 · Resposta</div>
+
+                    <svg
+                        class="cow-art"
+                        viewBox="0 0 320 210"
+                        role="img"
+                        aria-label="Ilustração de uma vaca preta e branca"
+                    >
+                        <ellipse
+                            cx="158" cy="184" rx="112" ry="12"
+                            fill="#dce7d2"
+                        />
+
+                        <path
+                            d="M75 72 Q86 49 124 55 L213 60 Q240 67 241 104 L230 151 L87 151 Q70 126 75 72Z"
+                            fill="#fffdf7"
+                            stroke="#26352a"
+                            stroke-width="4"
+                        />
+
+                        <path
+                            d="M104 62 Q122 55 139 72 L127 101 L92 106 L85 83Z"
+                            fill="#27352a"
+                        />
+
+                        <path
+                            d="M177 65 Q200 57 217 76 L209 104 L174 108 L162 86Z"
+                            fill="#27352a"
+                        />
+
+                        <path
+                            d="M104 145 L103 178 L122 178 L131 148 M196 148 L201 178 L220 178 L217 145"
+                            fill="#fffdf7"
+                            stroke="#26352a"
+                            stroke-width="4"
+                            stroke-linejoin="round"
+                        />
+
+                        <path
+                            d="M229 74 Q257 68 268 88 L273 116 Q268 138 246 139 L225 125Z"
+                            fill="#fffdf7"
+                            stroke="#26352a"
+                            stroke-width="4"
+                        />
+
+                        <path
+                            d="M232 82 L249 72 L256 83 L244 94Z"
+                            fill="#27352a"
+                        />
+
+                        <ellipse
+                            cx="255" cy="117" rx="21" ry="15"
+                            fill="#e7a7a0"
+                            stroke="#26352a"
+                            stroke-width="3"
+                        />
+
+                        <circle cx="250" cy="115" r="2.5" fill="#26352a"/>
+                        <circle cx="263" cy="115" r="2.5" fill="#26352a"/>
+                        <circle cx="242" cy="96" r="4" fill="#26352a"/>
+
+                        <path
+                            d="M233 75 L225 57 L240 64 M260 75 L271 59 L272 78"
+                            fill="#f4e7c7"
+                            stroke="#26352a"
+                            stroke-width="3"
+                            stroke-linejoin="round"
+                        />
+
+                        <path
+                            d="M77 80 Q53 74 57 52"
+                            fill="none"
+                            stroke="#26352a"
+                            stroke-width="4"
+                            stroke-linecap="round"
+                        />
+
+                        <path
+                            d="M86 178 L86 185 M122 178 L122 185 M201 178 L201 185 M220 178 L220 185"
+                            stroke="#26352a"
+                            stroke-width="4"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+
+                    <div class="answer-name">
+                        É uma vaca! 🐄
+                    </div>
+
+                    <p class="muted">
+                        Muuuuuu! Você acertou?
+                    </p>
+
+                    <button id="hideBtn" class="secondary">
+                        Esconder e tentar de novo
+                    </button>
+
+                </div>
+
+            </section>
+
+            
+
+        </div>
+    </main>
+
+</body>
+</html>

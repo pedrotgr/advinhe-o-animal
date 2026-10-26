@@ -1,0 +1,242 @@
+
+/* Configurações gerais */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #202820;
+    background-color: #f7f7f2;
+}
+
+/* Área principal */
+.app {
+    min-height: 100vh;
+    padding: 28px 18px 40px;
+}
+
+.wrap {
+    width: min(100%, 950px);
+    margin: 0 auto;
+}
+
+/* Cabeçalho */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 44px;
+    line-height: 1.1;
+    margin: 14px 0 10px;
+    letter-spacing: -1.5px;
+}
+
+header p {
+    max-width: 620px;
+    margin: 0 auto;
+    color: #667066;
+    font-size: 19px;
+    line-height: 1.6;
+}
+
+/* Cartão principal */
+.panel {
+    background-color: #ffffff;
+    border: 1px solid #e2e7dd;
+    border-radius: 30px;
+    padding: clamp(22px, 5vw, 42px);
+    box-shadow: 0 14px 40px rgba(34, 53, 34, 0.08);
+}
+
+/* Títulos e textos */
+.step {
+    color: #386641;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+h2 {
+    margin: 16px 0;
+    font-size: 29px;
+}
+
+.muted {
+    color: #7a8478;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+/* Área para selecionar o áudio */
+.audio-row {
+    margin-top: 20px;
+    padding: 18px;
+    background-color: #f2f5ee;
+    border-radius: 18px;
+}
+
+.audio-row label {
+    display: inline-block;
+    margin-bottom: 4px;
+    font-size: 18px;
+}
+
+input[type="file"] {
+    max-width: 100%;
+    font-size: 15px;
+}
+
+audio {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+}
+
+/* Botões */
+.actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+button {
+    border: none;
+    border-radius: 17px;
+    padding: 18px 24px;
+    font-size: 18px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+button:focus-visible {
+    outline: 3px solid #d9a441;
+    outline-offset: 3px;
+}
+
+.primary {
+    background-color: #a5bbaa;
+    color: #ffffff;
+}
+
+.primary:hover:not(:disabled) {
+    background-color: #8da994;
+}
+
+.secondary {
+    background-color: #f2cc8f;
+    color: #2c2418;
+}
+
+.secondary:hover:not(:disabled) {
+    background-color: #edbd70;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Mensagem de status */
+.status {
+    min-height: 24px;
+    margin-top: 18px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Resposta escondida inicialmente */
+.answer {
+    display: none;
+    text-align: center;
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 1px dashed #c6d0c0;
+}
+
+/* Resposta aparece quando o JavaScript adiciona a classe */
+.answer.visible {
+    display: block;
+    animation: aparecer 0.35s ease-out;
+}
+
+/* Ilustração da vaca */
+.cow-art {
+    display: block;
+    width: min(100%, 300px);
+    margin: 12px auto 4px;
+}
+
+.answer-name {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 12px 0;
+}
+
+/* Texto de orientação */
+.note {
+    margin-top: 22px;
+    color: #7a8478;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Animação da resposta */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajustes para celulares */
+@media (max-width: 600px) {
+    .app {
+        padding: 22px 12px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    header p {
+        font-size: 17px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .muted {
+        font-size: 16px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .actions button,
+    #hideBtn {
+        width: 100%;
+    }
+
+    .answer-name {
+        font-size: 27px;
+    }
+}
