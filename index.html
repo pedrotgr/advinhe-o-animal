@@ -2,55 +2,190 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Adivinhe o animal</title>
-<style>
-:root {
-  --site-primary: #386641;
-  --site-on-primary: #ffffff;
-  --site-secondary: #f2cc8f;
-  --site-on-secondary: #2c2418;
-  --site-background: #f7f7f2;
-  --site-on-background: #202820;
-  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --site-heading-scale: 1;
-  --site-spacing-scale: 1;
-  --site-radius-scale: 1;
-  --site-decoration-opacity: 1;
-}
-* { box-sizing: border-box; }
-body { margin: 0; font-family: var(--site-font-body); color: var(--site-on-background); background: var(--site-background); }
-.app { min-height: 100vh; width: 100%; background-color: var(--site-background); color: var(--site-on-background); padding: calc(28px * var(--site-spacing-scale)) 18px 40px; }
-.wrap { width: min(100%, 760px); margin: 0 auto; }
-header { text-align: center; margin-bottom: 24px; }
-.kicker { display: inline-block; background: var(--site-secondary); color: var(--site-on-secondary); border-radius: 999px; padding: 7px 12px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-h1 { font-family: var(--site-font-heading); font-size: calc(2.25rem * var(--site-heading-scale)); line-height: 1.05; margin: 14px 0 10px; letter-spacing: -.04em; }
-header p { margin: 0 auto; max-width: 500px; color: #667066; line-height: 1.6; }
-.panel { background: light-dark(#ffffff, #202820); border: 1px solid light-dark(#e2e7dd, #3b463b); border-radius: calc(24px * var(--site-radius-scale)); padding: clamp(20px, 5vw, 34px); box-shadow: 0 14px 40px rgba(34, 53, 34, .08); }
-.step { color: var(--site-primary); font-weight: 800; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }
-h2 { margin: 9px 0 8px; font-size: 1.5rem; }
-.muted { color: #7a8478; line-height: 1.55; }
-.actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
-button, .upload-label { border: 0; border-radius: 14px; padding: 14px 18px; font: inherit; font-weight: 750; cursor: pointer; transition: transform .15s, opacity .15s; }
-button:hover, .upload-label:hover { transform: translateY(-1px); }
-button:focus-visible, .upload-label:focus-within { outline: 3px solid #d9a441; outline-offset: 3px; }
-.primary { background: var(--site-primary); color: var(--site-on-primary); }
-.secondary { background: var(--site-secondary); color: var(--site-on-secondary); }
-button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
-.status { min-height: 24px; margin-top: 14px; font-size: .94rem; }
-.audio-row { margin-top: 18px; padding: 14px; background: light-dark(#f2f5ee, #2b352b); border-radius: 14px; }
-input[type=file] { max-width: 100%; }
-.answer { display: none; text-align: center; margin-top: 24px; padding-top: 24px; border-top: 1px dashed #c6d0c0; }
-.answer.visible { display: block; animation: appear .35s ease-out; }
-.cow-art { width: min(100%, 300px); margin: 12px auto 4px; display: block; }
-.answer-name { font-size: 2rem; margin: 8px 0; }
-.note { margin-top: 18px; font-size: .85rem; color: #7a8478; }
-@keyframes appear { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-@media (max-width: 480px) { h1 { font-size: calc(1.9rem * var(--site-heading-scale)); } .actions button { width: 100%; } }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adivinhe o animal</title>
+
+  <style>
+    :root {
+      --site-primary: #386641;
+      --site-on-primary: #ffffff;
+      --site-secondary: #f2cc8f;
+      --site-on-secondary: #2c2418;
+      --site-background: #f7f7f2;
+      --site-on-background: #202820;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--site-on-background);
+      background: var(--site-background);
+    }
+
+    .app {
+      min-height: 100vh;
+      padding: 28px 18px 40px;
+    }
+
+    .wrap {
+      width: min(100%, 760px);
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 5vw, 2.25rem);
+      line-height: 1.05;
+      margin: 14px 0 10px;
+      letter-spacing: -.04em;
+    }
+
+    header p {
+      margin: 0 auto;
+      max-width: 500px;
+      color: #667066;
+      line-height: 1.6;
+    }
+
+    .panel {
+      background: #ffffff;
+      border: 1px solid #e2e7dd;
+      border-radius: 24px;
+      padding: clamp(20px, 5vw, 34px);
+      box-shadow: 0 14px 40px rgba(34, 53, 34, .08);
+    }
+
+    .step {
+      color: var(--site-primary);
+      font-weight: 800;
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 9px 0 8px;
+      font-size: 1.5rem;
+    }
+
+    .muted {
+      color: #7a8478;
+      line-height: 1.55;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font: inherit;
+      font-weight: 750;
+      cursor: pointer;
+      transition: transform .15s, opacity .15s;
+    }
+
+    button:hover { transform: translateY(-1px); }
+
+    button:focus-visible {
+      outline: 3px solid #d9a441;
+      outline-offset: 3px;
+    }
+
+    .primary {
+      background: var(--site-primary);
+      color: var(--site-on-primary);
+    }
+
+    .secondary {
+      background: var(--site-secondary);
+      color: var(--site-on-secondary);
+    }
+
+    button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .status {
+      min-height: 24px;
+      margin-top: 14px;
+      font-size: .94rem;
+    }
+
+    .audio-row {
+      margin-top: 18px;
+      padding: 14px;
+      background: #f2f5ee;
+      border-radius: 14px;
+    }
+
+    audio {
+      display: block;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .answer {
+      display: none;
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px dashed #c6d0c0;
+    }
+
+    .answer.visible {
+      display: block;
+      animation: appear .35s ease-out;
+    }
+
+    .cow-art {
+      width: min(100%, 300px);
+      margin: 12px auto 4px;
+      display: block;
+    }
+
+    .cow-art[hidden] {
+      display: none;
+    }
+
+    .answer-name {
+      font-size: 2rem;
+      margin: 8px 0;
+    }
+
+    .note {
+      margin-top: 18px;
+      font-size: .85rem;
+      color: #7a8478;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .actions button { width: 100%; }
+    }
+  </style>
+
+  <script src="script.js" defer></script>
 </head>
+
 <body>
 <main class="app">
   <div class="wrap">
@@ -58,24 +193,32 @@ input[type=file] { max-width: 100%; }
       <h1>Adivinhe o animal 🐾</h1>
       <p>Escute com atenção, tente descobrir qual animal está fazendo esse som e revele a resposta quando estiver pronto.</p>
     </header>
+
     <section class="panel" aria-labelledby="game-title">
       <div class="step">Etapa 1 · Escute</div>
       <h2 id="game-title">Que animal é esse?</h2>
       <p class="muted">O som deve tocar antes de você ver a imagem. Clique em “Tocar som” para ouvir e tente adivinhar o animal.</p>
+
       <div class="audio-row">
-        <audio id="animalAudio" controls preload="metadata" style="display:block;width:100%;margin-top:12px">
-          <source src="https://pedrotgr.github.io/advinhe-o-animal/vaca.mp3" type="audio/mpeg">
+        <audio id="animalAudio" controls preload="metadata">
+          <source src="vaca.mp3" type="audio/mpeg">
           Seu navegador não suporta áudio.
         </audio>
       </div>
+
       <div class="actions">
-        <button id="playBtn" class="primary">🔊 Tocar som</button>
+        <button id="playBtn" class="primary" disabled>🔊 Tocar som</button>
         <button id="revealBtn" class="secondary">👀 Revelar resposta</button>
       </div>
-      <div id="status" class="status" role="status" aria-live="polite">Áudio pronto. Clique em “Tocar som” para começar.</div>
+
+      <div id="status" class="status" role="status" aria-live="polite">
+        Carregando áudio...
+      </div>
+
       <div id="answer" class="answer" aria-hidden="true">
         <div class="step">Etapa 2 · Resposta</div>
-        <svg class="cow-art" viewBox="0 0 320 210" role="img" aria-label="Ilustração de uma vaca preta e branca">
+
+        <svg class="cow-art" viewBox="0 0 320 210" role="img" aria-label="Ilustração de uma vaca preta e branca" hidden>
           <ellipse cx="158" cy="184" rx="112" ry="12" fill="#dce7d2"/>
           <path d="M75 72 Q86 49 124 55 L213 60 Q240 67 241 104 L230 151 L87 151 Q70 126 75 72Z" fill="#fffdf7" stroke="#26352a" stroke-width="4"/>
           <path d="M104 62 Q122 55 139 72 L127 101 L92 106 L85 83Z" fill="#27352a"/>
@@ -84,139 +227,22 @@ input[type=file] { max-width: 100%; }
           <path d="M229 74 Q257 68 268 88 L273 116 Q268 138 246 139 L225 125Z" fill="#fffdf7" stroke="#26352a" stroke-width="4"/>
           <path d="M232 82 L249 72 L256 83 L244 94Z" fill="#27352a"/>
           <ellipse cx="255" cy="117" rx="21" ry="15" fill="#e7a7a0" stroke="#26352a" stroke-width="3"/>
-          <circle cx="250" cy="115" r="2.5" fill="#26352a"/><circle cx="263" cy="115" r="2.5" fill="#26352a"/>
-          <circle cx="242" cy="96" r="4" fill="#26352a"/><path d="M233 75 L225 57 L240 64 M260 75 L271 59 L272 78" fill="#f4e7c7" stroke="#26352a" stroke-width="3" stroke-linejoin="round"/>
+          <circle cx="250" cy="115" r="2.5" fill="#26352a"/>
+          <circle cx="263" cy="115" r="2.5" fill="#26352a"/>
+          <circle cx="242" cy="96" r="4" fill="#26352a"/>
+          <path d="M233 75 L225 57 L240 64 M260 75 L271 59 L272 78" fill="#f4e7c7" stroke="#26352a" stroke-width="3" stroke-linejoin="round"/>
           <path d="M77 80 Q53 74 57 52" fill="none" stroke="#26352a" stroke-width="4" stroke-linecap="round"/>
           <path d="M86 178 L86 185 M122 178 L122 185 M201 178 L201 185 M220 178 L220 185" stroke="#26352a" stroke-width="4" stroke-linecap="round"/>
         </svg>
-        <div class="answer-name">É uma vaca! 🐄</div>
-        <p class="muted">Muuuuuu! Você acertou?</p>
+
+        <div class="answer-name" id="answerName">É uma vaca! 🐄</div>
+        <p class="muted" id="answerSound">Muuuuuu! Você acertou?</p>
         <button id="hideBtn" class="secondary">Esconder e tentar de novo</button>
       </div>
     </section>
- 
+
+    <p class="note">Dica: toque no botão para ouvir o som e revele a resposta quando estiver pronto.</p>
   </div>
 </main>
-<script>
-
-const audio = document.querySelector('#animalAudio');
-const playBtn = document.querySelector('#playBtn');
-const revealBtn = document.querySelector('#revealBtn');
-const hideBtn = document.querySelector('#hideBtn');
-const answer = document.querySelector('#answer');
-const status = document.querySelector('#status');
-
-const animais = {
-  gato: {
-    nome: 'um gato 🐱',
-    arquivo: 'gato.mp3',
-    som: 'Miau! Você acertou?'
-  },
-  cavalo: {
-    nome: 'um cavalo 🐴',
-    arquivo: 'cavalo.mp3',
-    som: 'Relincho! Você acertou?'
-  },
-  vaca: {
-    nome: 'uma vaca 🐄',
-    arquivo: 'vaca.mp3',
-    som: 'Muuuuuu! Você acertou?'
-  },
-  galo: {
-    nome: 'um galo 🐓',
-    arquivo: 'galo.mp3',
-    som: 'Cocoricó! Você acertou?'
-  },
-  elefante: {
-    nome: 'um elefante 🐘',
-    arquivo: 'elefante.mp3',
-    som: 'Som do elefante! Você acertou?'
-  },
-  porco: {
-    nome: 'um porco 🐷',
-    arquivo: 'porco.mp3',
-    som: 'Oinc oinc! Você acertou?'
-  },
-  leao: {
-    nome: 'um leão 🦁',
-    arquivo: 'leao.mp3',
-    som: 'Rugido! Você acertou?'
-  },
-  pato: {
-    nome: 'um pato 🦆',
-    arquivo: 'pato.mp3',
-    som: 'Quack quack! Você acertou?'
-  },
-  pintinho: {
-    nome: 'um pintinho 🐥',
-    arquivo: 'pintinho.mp3',
-    som: 'Piu piu! Você acertou?'
-  },
-  cachorro: {
-    nome: 'um cachorro 🐶',
-    arquivo: 'cachorro.mp3',
-    som: 'Au au! Você acertou?'
-  },
-  cabra: {
-    nome: 'uma cabra 🐐',
-    arquivo: 'cabra.mp3',
-    som: 'Mééé! Você acertou?'
-  }
-};
-
-// Descobre qual animal veio na URL
-const parametros = new URLSearchParams(window.location.search);
-const idAnimal = parametros.get('animal') || 'vaca';
-const animal = animais[idAnimal] || animais.vaca;
-
-// Carrega o arquivo de áudio correto
-audio.querySelector('source').src = animal.arquivo;
-audio.load();
-
-// Atualiza a resposta
-document.querySelector('.answer-name').textContent =
-  `É ${animal.nome}!`;
-
-answer.querySelector('.muted').textContent = animal.som;
-
-// Mostra o desenho da vaca somente no desafio da vaca
-document.querySelector('.cow-art').hidden = idAnimal !== 'vaca';
-
-audio.addEventListener('canplay', () => {
-  playBtn.disabled = false;
-  status.textContent = 'Áudio pronto. Clique em “Tocar som” para começar.';
-});
-
-audio.addEventListener('error', () => {
-  playBtn.disabled = true;
-  status.textContent =
-    `Não foi possível carregar ${animal.arquivo}. Confira o nome do arquivo no GitHub.`;
-});
-
-playBtn.addEventListener('click', async () => {
-  try {
-    await audio.play();
-    status.textContent = 'Som tocando! Tente adivinhar antes de revelar.';
-  } catch (error) {
-    status.textContent = 'Não consegui tocar o áudio. Confira o arquivo.';
-  }
-});
-
-audio.addEventListener('ended', () => {
-  status.textContent = 'O som terminou. Já descobriu o animal?';
-});
-
-revealBtn.addEventListener('click', () => {
-  answer.classList.add('visible');
-  answer.setAttribute('aria-hidden', 'false');
-  status.textContent = 'Resposta revelada!';
-});
-
-hideBtn.addEventListener('click', () => {
-  answer.classList.remove('visible');
-  answer.setAttribute('aria-hidden', 'true');
-  status.textContent = 'Resposta escondida novamente. Escute e tente adivinhar!';
-});
-</script>
 </body>
 </html>
